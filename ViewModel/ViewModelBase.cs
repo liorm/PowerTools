@@ -13,6 +13,12 @@ namespace LiorTech.PowerTools.ViewModel
     /// </summary>
     public abstract class ViewModelBase : ReactiveObject, IViewModel
     {
+        static ViewModelBase()
+        {
+            // We use m_xXXX" property format.
+            RxApp.GetFieldNameForPropertyNameFunc = a_prop => "m_" + Char.ToLower(a_prop[0]) + a_prop.Substring(1);
+        }
+
         private static bool? m_isInDesignMode;
         public static bool IsInDesignMode
         {
