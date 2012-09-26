@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace LiorTech.PowerTools.Globalization
 {
-    class FlowDirectionBindingExtension : Binding
+    public class FlowDirectionBindingExtension : Binding
     {
         ///<summary>
         /// Contruct a new binding.

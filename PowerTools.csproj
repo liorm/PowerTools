@@ -45,6 +45,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Globalization\CultureChangedEventArgs.cs" />
+    <Compile Include="Globalization\CultureChangedWeakEventManager.cs" />
     <Compile Include="Globalization\CultureManager.cs" />
     <Compile Include="Globalization\ResourceEnumConverter.cs" />
     <Compile Include="Globalization\EnumLocalizationConverterBase.cs" />
