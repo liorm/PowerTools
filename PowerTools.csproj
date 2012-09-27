@@ -82,7 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\DialogService.cs" />
     <Compile Include="ViewModel\DialogViewModelBase.cs" />
-    <Compile Include="ViewModel\DialogViewTypeAttribute.cs" />
     <Compile Include="ViewModel\DialogWindow.cs" />
     <Compile Include="ViewModel\IDialogView.cs" />
     <Compile Include="ViewModel\IDialogViewModel.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="ViewModel\IWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WindowViewModelBase.cs" />
-    <Compile Include="ViewModel\WindowViewTypeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactiveUI\ReactiveUI.Xaml\ReactiveUI.Xaml.csproj">

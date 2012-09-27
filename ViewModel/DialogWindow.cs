@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace LiorTech.PowerTools.ViewModel
 {
@@ -28,6 +29,12 @@ namespace LiorTech.PowerTools.ViewModel
         {
             Close();
         }
+
+        #endregion
+
+        #region Implementation of IViewFor
+
+        public object ViewModel { get; set; }
 
         #endregion
     }

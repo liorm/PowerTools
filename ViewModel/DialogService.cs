@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
+using ReactiveUI;
 
 namespace LiorTech.PowerTools.ViewModel
 {
@@ -145,40 +146,21 @@ namespace LiorTech.PowerTools.ViewModel
         /// <param name="a_beforeShowingCallback">Function to call before showing the newly created window</param>
         /// <returns>A nullable value of type bool that signifies how a window was closed by the
         /// user.</returns>
-        /// <remarks>This method guesses the type of the window to open by the attribute <see cref="DialogViewTypeAttribute"/> from the <paramref name="a_viewModel"/></remarks>
-        public bool? ShowDialog(IViewModel a_ownerViewModel, IDialogViewModel a_viewModel, Action<Window> a_beforeShowingCallback = null)
+        /// <remarks>This method guesses the type of the window to open by using <see cref="RxApp.GetService"/> for <see cref="IDialogView{T}"/> </remarks>
+        public bool? ShowDialog<T>(IDialogViewModel a_viewModel, IViewModel a_ownerViewModel = null, Action<Window> a_beforeShowingCallback = null)
+            where T : class, IDialogViewModel
         {
-            var attrs = a_viewModel.GetType().GetCustomAttributes( typeof(DialogViewTypeAttribute), true );
-            if ( attrs.Length == 0)
-                throw new InvalidOperationException(@"Can't find the DialogViewTypeAttribute on the view model instance");
-
-            var dialog = (Window)Activator.CreateInstance(((DialogViewTypeAttribute)attrs[0]).DialogViewType);
+            var dialogView = RxApp.GetService<IDialogView<T>>();
+            Window window = dialogView as Window;
+            if (window == null || dialogView == null)
+                throw new InvalidOperationException(@"Can't find service for IDialogView<T> or not a Window for view model " + typeof(T).FullName);
 
             if (a_beforeShowingCallback != null)
-                a_beforeShowingCallback(dialog);
+                a_beforeShowingCallback(window);
 
             return ShowDialog( a_ownerViewModel, 
                                a_viewModel,
-                               dialog);
-        }
-
-        /// <summary>
-        /// Shows a dialog.
-        /// </summary>
-        /// <param name="a_ownerViewModel">A ViewModel that represents the owner window of the
-        /// dialog.</param>
-        /// <param name="a_viewModel">The ViewModel of the new dialog.</param>
-        /// <param name="a_beforeShowingCallback">Function to call before showing the newly created window</param>
-        /// <returns>A nullable value of type bool that signifies how a window was closed by the
-        /// user.</returns>
-        public bool? ShowDialog<T>(IViewModel a_ownerViewModel, IDialogViewModel a_viewModel, Action<T> a_beforeShowingCallback = null) 
-            where T : Window, IDialogView
-        {
-            // Create dialog and set properties
-            var dialog = Activator.CreateInstance<T>();
-            if (a_beforeShowingCallback != null)
-                a_beforeShowingCallback(dialog);
-            return ShowDialog(a_ownerViewModel, a_viewModel, dialog);
+                               window);
         }
 
         private bool? ShowDialog(IViewModel a_ownerViewModel, IDialogViewModel a_viewModel, Window a_dialog)
@@ -204,23 +186,6 @@ namespace LiorTech.PowerTools.ViewModel
             }
         }
 
-        /// <summary>
-        /// Shows a dialog.
-        /// </summary>
-        /// <param name="a_ownerViewModel">A ViewModel that represents the owner window of the
-        /// dialog.</param>
-        /// <returns>A nullable value of type bool that signifies how a window was closed by the
-        /// user.</returns>
-        public bool? ShowDialog<T>(IViewModel a_ownerViewModel) where T : Window
-        {
-            // Create dialog and set properties
-            T dialog = Activator.CreateInstance<T>();
-            dialog.Owner = FindOwnerWindow(a_ownerViewModel);
-
-            // Show dialog
-            return dialog.ShowDialog();
-        }
-
         #endregion
 
         #region ShowWindow Functions
@@ -234,25 +199,26 @@ namespace LiorTech.PowerTools.ViewModel
         /// <param name="a_beforeShowingCallback">Called before the window is opened</param>
         /// <returns>A nullable value of type bool that signifies how a window was closed by the
         /// user.</returns>
-        /// <remarks>This method guesses the type of the window to open by the attribute <see cref="DialogViewTypeAttribute"/> from the <paramref name="a_viewModel"/></remarks>
-        public void ShowWindow(IWindowViewModel a_viewModel, Action<bool?> a_windowClosedCallback, IViewModel a_ownerViewModel = null, Action<Window> a_beforeShowingCallback = null)
+        /// <remarks>This method guesses the type of the window to open by using <see cref="RxApp.GetService"/> for <see cref="IWindowView{T}"/> </remarks>
+        public void ShowWindow<T>(T a_viewModel, IViewModel a_ownerViewModel = null, Action a_windowClosedCallback = null, Action<Window> a_beforeShowingCallback = null)
+            where T : class, IWindowViewModel
         {
-            var attrs = a_viewModel.GetType().GetCustomAttributes(typeof(WindowViewTypeAttribute), true);
-            if (attrs.Length == 0)
-                throw new InvalidOperationException(@"Can't find the WindowViewTypeAttribute on the view model instance");
+            var windowView = RxApp.GetService<IWindowView<T>>();
+            Window window = windowView as Window;
+            if ( window == null || windowView == null )
+                throw new InvalidOperationException(@"Can't find service for IWindowView<T> or not a Window for view model " + typeof(T).FullName);
 
-            var window = (Window)Activator.CreateInstance(((WindowViewTypeAttribute)attrs[0]).DialogViewType);
             if (a_beforeShowingCallback != null)
                 a_beforeShowingCallback(window);
 
             ShowWindow(
-                a_ownerViewModel, 
+                a_ownerViewModel,
                 a_viewModel, 
                 window,
                 a_windowClosedCallback);
         }
 
-        private void ShowWindow(IViewModel a_ownerViewModel, IWindowViewModel a_viewModel, Window a_dialog, Action<bool?> a_windowClosedCallback)
+        private void ShowWindow(IViewModel a_ownerViewModel, IWindowViewModel a_viewModel, Window a_dialog, Action a_windowClosedCallback)
         {
             // Create dialog and set properties
             a_dialog.DataContext = a_viewModel;
@@ -287,10 +253,10 @@ namespace LiorTech.PowerTools.ViewModel
             window.Closing -= ShowWindowDialog_Closing;
             window.Closed -= ShowWindowDialog_Closed;
 
-            Action<bool?> closeAction = window.Tag as Action<bool?>;
+            Action closeAction = window.Tag as Action;
             if (closeAction != null)
             {
-                closeAction(window.DialogResult);
+                closeAction();
                 window.Tag = null;
             }
         }
