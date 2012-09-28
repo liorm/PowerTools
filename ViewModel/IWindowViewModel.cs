@@ -10,6 +10,11 @@
         /// </summary>
         IWindowView WindowView { set; }
 
+		/// <summary>
+		/// Called by the infrastructure right after the window is shown.
+		/// </summary>
+    	void WindowShown();
+
         /// <summary>
         /// Called by the infrastructure when the dialog is closing - the VM should return true if the dialog can close or false.
         /// </summary>

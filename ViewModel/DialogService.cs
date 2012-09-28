@@ -216,6 +216,9 @@ namespace LiorTech.PowerTools.ViewModel
                 a_viewModel, 
                 window,
                 a_windowClosedCallback);
+
+			// Notify that the window is shown.
+			a_viewModel.WindowShown();
         }
 
         private void ShowWindow(IViewModel a_ownerViewModel, IWindowViewModel a_viewModel, Window a_dialog, Action a_windowClosedCallback)

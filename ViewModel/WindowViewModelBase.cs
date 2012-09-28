@@ -1,4 +1,6 @@
-﻿namespace LiorTech.PowerTools.ViewModel
+﻿using System;
+
+namespace LiorTech.PowerTools.ViewModel
 {
     /// <summary>
     /// Base class for a window view model (Default implementation of <see cref="IWindowViewModel"/>)
@@ -12,7 +14,12 @@
         /// </summary>
         IWindowView IWindowViewModel.WindowView { set { m_windowView = value; } }
 
-        /// <summary>
+    	public virtual void WindowShown()
+    	{
+			// Do nothing here.
+    	}
+
+    	/// <summary>
         /// Called by the infrastructure when the dialog is closing - the VM should return true if the dialog can close or false.
         /// </summary>
         /// <returns>true to close the dialog, false to keep it open</returns>
