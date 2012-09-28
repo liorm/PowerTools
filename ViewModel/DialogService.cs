@@ -147,7 +147,7 @@ namespace LiorTech.PowerTools.ViewModel
         /// <returns>A nullable value of type bool that signifies how a window was closed by the
         /// user.</returns>
         /// <remarks>This method guesses the type of the window to open by using <see cref="RxApp.GetService"/> for <see cref="IDialogView{T}"/> </remarks>
-        public bool? ShowDialog<T>(IDialogViewModel a_viewModel, IViewModel a_ownerViewModel = null, Action<Window> a_beforeShowingCallback = null)
+        public bool? ShowDialog<T>(T a_viewModel, IViewModel a_ownerViewModel = null, Action<Window> a_beforeShowingCallback = null)
             where T : class, IDialogViewModel
         {
             var dialogView = RxApp.GetService<IDialogView<T>>();
