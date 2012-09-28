@@ -3,7 +3,7 @@ using ReactiveUI.Xaml;
 
 namespace LiorTech.PowerTools.Commanding
 {
-    public class AugmentedReactiveCommand : IReactiveCommand, IDisposable, ICommandDescriptionProvider, ICommandImageProvider
+	public class AugmentedReactiveCommand : IReactiveCommand, IDisposable, ICommandDescriptionProvider, ICommandImageProvider
     {
         public AugmentedReactiveCommand(ReactiveCommand a_subCommand, CommandDescriptionBase a_commandDescriptionBase, bool a_hasImageResource = false)
         {

@@ -3,7 +3,7 @@ using ReactiveUI.Xaml;
 
 namespace LiorTech.PowerTools.Commanding
 {
-    public static class AugmentedReactiveCommandMixins
+	public static class AugmentedReactiveCommandMixins
     {
         public static AugmentedReactiveCommand Augment(this ReactiveCommand a_this, CommandDescriptionBase a_commandDescriptionBase)
         {
