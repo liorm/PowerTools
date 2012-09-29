@@ -279,9 +279,12 @@ namespace LiorTech.PowerTools.ViewModel
         /// <returns>A MessageBoxResult value that specifies which message box button is clicked by the
         /// user.</returns>
         public MessageBoxResult ShowMessageBox(IViewModel a_ownerViewModel, string a_messageBoxText, string a_caption,
-            MessageBoxButton a_button, MessageBoxImage a_icon)
+            MessageBoxButton a_button, MessageBoxImage a_icon, MessageBoxResult? a_defaultResult = null)
         {
-            return MessageBox.Show(FindOwnerWindow(a_ownerViewModel), a_messageBoxText, a_caption, a_button, a_icon);
+			if ( a_defaultResult.HasValue )
+				return MessageBox.Show(FindOwnerWindow(a_ownerViewModel), a_messageBoxText, a_caption, a_button, a_icon, a_defaultResult.Value);
+
+			return MessageBox.Show(FindOwnerWindow(a_ownerViewModel), a_messageBoxText, a_caption, a_button, a_icon);
         }
 
         #endregion
