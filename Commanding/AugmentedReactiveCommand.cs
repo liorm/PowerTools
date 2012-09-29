@@ -5,6 +5,17 @@ namespace LiorTech.PowerTools.Commanding
 {
 	public class AugmentedReactiveCommand : IReactiveCommand, IDisposable, ICommandDescriptionProvider, ICommandImageProvider
     {
+        public AugmentedReactiveCommand(CommandDescriptionBase a_commandDescriptionBase, bool a_hasImageResource = false) :
+			this(new ReactiveCommand(), a_commandDescriptionBase, a_hasImageResource)
+        {
+        }
+
+        public AugmentedReactiveCommand(CommandDescriptionBase a_commandDescriptionBase, Uri a_imageUriOverride) :
+			this(new ReactiveCommand(), a_commandDescriptionBase, a_imageUriOverride)
+        {
+        	
+        }
+
         public AugmentedReactiveCommand(ReactiveCommand a_subCommand, CommandDescriptionBase a_commandDescriptionBase, bool a_hasImageResource = false)
         {
             m_subCommand = a_subCommand;
