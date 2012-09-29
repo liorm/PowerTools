@@ -38,25 +38,29 @@ namespace LiorTech.PowerTools.Commanding
 
 		#region Implementation of ICommand
 
-		public void Execute(object parameter)
+		public void Execute(object a_parameter)
 		{
-			m_subCommand.Execute(parameter);
+			m_subCommand.Execute(a_parameter);
 		}
 
-		public bool CanExecute(object parameter)
+		public bool CanExecute(object a_parameter)
 		{
-			return m_subCommand.CanExecute(parameter);
+			return m_subCommand.CanExecute(a_parameter);
 		}
 
-		public event EventHandler CanExecuteChanged;
+		public event EventHandler CanExecuteChanged
+		{
+			add { m_subCommand.CanExecuteChanged += value; }
+			remove { m_subCommand.CanExecuteChanged -= value; }
+		}
 
 		#endregion
 
 		#region Implementation of IObservable<out object>
 
-		public IDisposable Subscribe(IObserver<object> observer)
+		public IDisposable Subscribe(IObserver<object> a_observer)
 		{
-			return m_subCommand.Subscribe(observer);
+			return m_subCommand.Subscribe(a_observer);
 		}
 
 		#endregion
