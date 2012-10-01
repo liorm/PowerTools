@@ -9,7 +9,7 @@ namespace LiorTech.PowerTools.Globalization
 		/// <summary>
 		/// Creates a new GenericWeakEventManagerBase instance.
 		/// </summary>
-		public CultureChangedWeakEventManager()
+		private CultureChangedWeakEventManager()
 		{
 		}
 
