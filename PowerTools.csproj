@@ -82,6 +82,7 @@
     <Compile Include="Utilities\BooleanConverters\NullToBooleanConverter.cs" />
     <Compile Include="Utilities\ConverterMarkupExtension.cs" />
     <Compile Include="Utilities\GenericWeakEventManagerBase.cs" />
+    <Compile Include="Utilities\HlsColor.cs" />
     <Compile Include="Utilities\UIElementFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\DialogService.cs" />
