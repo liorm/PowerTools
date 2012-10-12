@@ -7,17 +7,23 @@ namespace LiorTech.PowerTools.Commanding
     {
         public static AugmentedReactiveCommand Augment(this ReactiveCommand a_this, CommandDescriptionBase a_commandDescriptionBase)
         {
-            return new AugmentedReactiveCommand(a_this, a_commandDescriptionBase);
+            var newCmd = new AugmentedReactiveCommand(a_commandDescriptionBase, a_this.CanExecuteObservable);
+            a_this.Subscribe(newCmd.Execute);
+            return newCmd;
         }
 
         public static AugmentedReactiveCommand Augment(this ReactiveCommand a_this, CommandDescriptionBase a_commandDescriptionBase, bool a_hasImageResource)
         {
-            return new AugmentedReactiveCommand(a_this, a_commandDescriptionBase, a_hasImageResource);
+            var newCmd = new AugmentedReactiveCommand(a_commandDescriptionBase, a_hasImageResource, a_this.CanExecuteObservable);
+            a_this.Subscribe(newCmd.Execute);
+            return newCmd;
         }
 
         public static AugmentedReactiveCommand Augment(this ReactiveCommand a_this, CommandDescriptionBase a_commandDescriptionBase, Uri a_imageUriOverride)
         {
-            return new AugmentedReactiveCommand(a_this, a_commandDescriptionBase, a_imageUriOverride);
+            var newCmd = new AugmentedReactiveCommand(a_commandDescriptionBase, a_imageUriOverride, a_this.CanExecuteObservable);
+            a_this.Subscribe(newCmd.Execute);
+            return newCmd;
         }
     }
 }
