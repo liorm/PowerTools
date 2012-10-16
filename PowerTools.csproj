@@ -90,6 +90,8 @@
     <Compile Include="Utilities\BooleanConverters\NotNullToBooleanConverter.cs" />
     <Compile Include="Utilities\BooleanConverters\NullToBooleanConverter.cs" />
     <Compile Include="Utilities\ConverterMarkupExtension.cs" />
+    <Compile Include="Utilities\DialogFilterBuilder.cs" />
+    <Compile Include="Utilities\DispatcherUtils.cs" />
     <Compile Include="Utilities\GenericWeakEventManagerBase.cs" />
     <Compile Include="Utilities\HlsColor.cs" />
     <Compile Include="Utilities\UIElementFinder.cs" />
