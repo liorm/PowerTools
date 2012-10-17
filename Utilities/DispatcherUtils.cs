@@ -51,6 +51,19 @@ namespace LiorTech.PowerTools.Utilities
 
         #endregion
 
+        public static TRet InvokeFunc<TRet>(
+            this Dispatcher a_dispatcher,
+            Func<TRet> a_func)
+        {
+            if (a_dispatcher.CheckAccess())
+                return a_func();
+
+            TRet result = default(TRet);
+            a_dispatcher.Invoke(() => result = a_func());
+
+            return result;
+        }
+
         /// <summary>
         /// Execute the action or call BeginInvoke if access is denied.
         /// </summary>
