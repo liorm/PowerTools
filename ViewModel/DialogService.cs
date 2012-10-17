@@ -208,6 +208,9 @@ namespace LiorTech.PowerTools.ViewModel
             if ( window == null || windowView == null )
                 throw new InvalidOperationException(@"Can't find service for IWindowView<T> or not a Window for view model " + typeof(T).FullName);
 
+            // Set the VM.
+            windowView.ViewModel = a_viewModel;
+
             if (a_beforeShowingCallback != null)
                 a_beforeShowingCallback(window);
 
@@ -262,6 +265,11 @@ namespace LiorTech.PowerTools.ViewModel
                 closeAction();
                 window.Tag = null;
             }
+
+            // Remove the VM.
+            IViewFor viewFor = window as IViewFor;
+            if (viewFor != null)
+                viewFor.ViewModel = null;
         }
 
         #endregion
