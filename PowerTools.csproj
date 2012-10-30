@@ -93,6 +93,7 @@
     <Compile Include="Utilities\ConverterMarkupExtension.cs" />
     <Compile Include="Utilities\DialogFilterBuilder.cs" />
     <Compile Include="Utilities\DispatcherUtils.cs" />
+    <Compile Include="Utilities\FunctionComparer.cs" />
     <Compile Include="Utilities\GenericWeakEventManagerBase.cs" />
     <Compile Include="Utilities\HlsColor.cs" />
     <Compile Include="Utilities\UIElementFinder.cs" />
