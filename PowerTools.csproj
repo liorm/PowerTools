@@ -84,7 +84,8 @@
     <Compile Include="Globalization\CultureChangedEventArgs.cs" />
     <Compile Include="Globalization\CultureChangedWeakEventManager.cs" />
     <Compile Include="Globalization\CultureManager.cs" />
-    <Compile Include="Globalization\ResourceCommandDescription.cs" />
+    <Compile Include="Globalization\DynamicResourceStringBase.cs" />
+    <Compile Include="Globalization\ResourceCommandDescriptionBase.cs" />
     <Compile Include="Globalization\ResourceEnumConverter.cs" />
     <Compile Include="Globalization\EnumLocalizationConverterBase.cs" />
     <Compile Include="Globalization\FlowDirectionBindingExtension.cs" />
