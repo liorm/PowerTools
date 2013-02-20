@@ -118,6 +118,7 @@
     <Compile Include="Utilities\FunctionComparer.cs" />
     <Compile Include="Utilities\GenericWeakEventManagerBase.cs" />
     <Compile Include="Utilities\HlsColor.cs" />
+    <Compile Include="Utilities\StretchedHeaderTemplate.cs" />
     <Compile Include="Utilities\UIElementFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\DialogService.cs" />
