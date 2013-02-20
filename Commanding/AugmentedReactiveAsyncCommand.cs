@@ -110,5 +110,11 @@ namespace LiorTech.PowerTools.Commanding
 		}
 
 		#endregion
-	}
+
+        public override string ToString()
+        {
+            // For debug purposes.
+            return Description.Name;
+        }
+    }
 }

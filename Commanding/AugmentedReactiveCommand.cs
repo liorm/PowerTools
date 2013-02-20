@@ -36,5 +36,11 @@ namespace LiorTech.PowerTools.Commanding
         public Uri ImageUriOverride { get; private set; }
 
         #endregion
+
+        public override string ToString()
+        {
+            // For debug purposes.
+            return Description.Name;
+        }
     }
 }
