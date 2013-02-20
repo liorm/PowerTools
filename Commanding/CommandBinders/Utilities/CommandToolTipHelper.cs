@@ -70,7 +70,7 @@ namespace LiorTech.PowerTools.Commanding.CommandBinders.Utilities
             if (newDescProvider == null)
                 return null;
 
-            if (newDescProvider.Description.Gestures.Count > 0)
+            if (newDescProvider.Description.Gestures != null && newDescProvider.Description.Gestures.Count > 0)
 			{
                 KeyGesture keyGesture = newDescProvider.Description.Gestures[0] as KeyGesture;
 				if ( keyGesture != null && keyGesture.DisplayString.Length > 0 )
