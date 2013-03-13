@@ -28,6 +28,11 @@ namespace LiorTech.PowerTools.ViewModel
             return true;
         }
 
+        public virtual void WindowClosed()
+        {
+            CleanupViewModel();
+        }
+
         #endregion
 
         /// <summary>

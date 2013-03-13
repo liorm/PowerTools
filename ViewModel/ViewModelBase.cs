@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -35,6 +36,48 @@ namespace LiorTech.PowerTools.ViewModel
 
                 return m_isInDesignMode.GetValueOrDefault();
             }
+        }
+
+        private CompositeDisposable m_disposables;
+
+        /// <summary>
+        /// Add the specified disposable to the collection of disposed objects when <see cref="CleanupViewModel"/> is called.
+        /// </summary>
+        /// <param name="a_disposable"></param>
+        protected void AddDisposable(IDisposable a_disposable)
+        {
+            if ( m_disposables == null )
+                m_disposables = new CompositeDisposable();
+
+            m_disposables.Add(a_disposable);
+        }
+
+        /// <summary>
+        /// Removes a disposable previously added with <see cref="AddDisposable"/>
+        /// </summary>
+        /// <param name="a_disposable">Disposable to remove</param>
+        /// <param name="a_dispose">Should we dispose of the object automatically while removing it?</param>
+        protected void RemoveDisposable(IDisposable a_disposable, bool a_dispose = false)
+        {
+            if ( m_disposables == null )
+                return;
+
+            if ( m_disposables.Remove(a_disposable) && a_dispose )
+                a_disposable.Dispose();
+        }
+
+        /// <summary>
+        /// Cleanup disposables associated with this VM (using <see cref="AddDisposable"/>).
+        /// </summary>
+        /// <remarks>
+        /// <see cref="WindowViewModelBase"/> and <see cref="DialogViewModelBase"/> do this automatically.
+        /// </remarks>
+        protected void CleanupViewModel()
+        {
+            if ( m_disposables == null ) 
+                return;
+
+            m_disposables.Dispose();
         }
 
         /// <summary>

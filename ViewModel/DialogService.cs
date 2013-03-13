@@ -181,6 +181,7 @@ namespace LiorTech.PowerTools.ViewModel
             }
             finally
             {
+                a_viewModel.DialogClosed();
                 a_viewModel.DialogView = null;
                 a_dialog.Closing -= cancelEventHandler;
             }
@@ -192,6 +193,7 @@ namespace LiorTech.PowerTools.ViewModel
 
         /// <summary>
         /// Shows a window.
+        /// This method guesses the type of the window to open by using <see cref="RxApp.GetService{T}"/> for <see cref="IWindowView{T}"/>
         /// </summary>
         /// <param name="a_viewModel">The ViewModel of the new dialog.</param>
         /// <param name="a_windowClosedCallback">Callback to call when dialog is closed</param>
@@ -199,7 +201,6 @@ namespace LiorTech.PowerTools.ViewModel
         /// <param name="a_beforeShowingCallback">Called before the window is opened</param>
         /// <returns>A nullable value of type bool that signifies how a window was closed by the
         /// user.</returns>
-        /// <remarks>This method guesses the type of the window to open by using <see cref="RxApp.GetService"/> for <see cref="IWindowView{T}"/> </remarks>
         public void ShowWindow<T>(T a_viewModel, IViewModel a_ownerViewModel = null, Action a_windowClosedCallback = null, Action<Window> a_beforeShowingCallback = null)
             where T : class, IWindowViewModel
         {
@@ -254,6 +255,8 @@ namespace LiorTech.PowerTools.ViewModel
         {
             Window window = (Window)a_sender;
             IWindowViewModel viewModel = (IWindowViewModel)window.DataContext;
+
+            viewModel.WindowClosed();
 
             viewModel.WindowView = null;
             window.Closing -= ShowWindowDialog_Closing;

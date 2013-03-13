@@ -15,5 +15,10 @@
         /// </summary>
         /// <returns>true to close the dialog, false to keep it open</returns>
         bool DialogIsClosing();
+
+        /// <summary>
+        /// Called by the infrastructure when the dialog is closed - the VM should free required resources.
+        /// </summary>
+        void DialogClosed();
     }
 }

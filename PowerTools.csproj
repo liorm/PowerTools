@@ -105,8 +105,12 @@
     <Compile Include="Commanding\CommandHelper.cs" />
     <Compile Include="Commanding\ICommandDescriptionProvider.cs" />
     <Compile Include="Commanding\ICommandImageProvider.cs" />
+    <Compile Include="ObservableVariable.cs" />
+    <Compile Include="ObservableVariableMixins.cs" />
     <Compile Include="Utilities\BooleanConverters\BooleanInverterConverter.cs" />
     <Compile Include="Utilities\BooleanConverters\BooleanToVisibilityConverterEx.cs" />
+    <Compile Include="Utilities\BooleanConverters\EnumConverter.cs" />
+    <Compile Include="Utilities\BooleanConverters\GenericBooleanConverter.cs" />
     <Compile Include="Utilities\BooleanConverters\GenericEqualityConverter.cs" />
     <Compile Include="Utilities\BooleanConverters\MultiBooleanConverter.cs" />
     <Compile Include="Utilities\BooleanConverters\MultiBooleanToVisibilityConverter.cs" />

@@ -21,6 +21,11 @@
             return true;
         }
 
+        public virtual void DialogClosed()
+        {
+            CleanupViewModel();
+        }
+
         #endregion
 
         /// <summary>
