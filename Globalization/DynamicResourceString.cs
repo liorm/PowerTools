@@ -170,7 +170,7 @@ namespace LiorTech.PowerTools.Globalization
             static ResourceWrapper()
             {
                 var propInfo = typeof(TParent).GetProperty("ResourceManager", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
-                Manager = (ResourceManager)propInfo.GetValue(null);
+                Manager = (ResourceManager)propInfo.GetValue(null, null);
             }
 
             public ResourceWrapper(string a_name, object[] a_args)
